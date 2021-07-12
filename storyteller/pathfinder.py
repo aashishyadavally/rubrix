@@ -8,7 +8,9 @@ def get_root():
     --------
         root (pathlib.Path)
     """
-    root = Path.cwd()
+    cwd = str(Path.cwd())
+    root = Path(cwd[:cwd.find('storyteller')]) / 'storyteller'
+
     return root
 
 
@@ -30,5 +32,5 @@ def get(*args):
 
     for arg in args:
         path = path / arg
-    return path
 
+    return path
