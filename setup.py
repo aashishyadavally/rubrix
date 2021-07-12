@@ -2,8 +2,6 @@
 A setuptools based setup module.
 References: https://github.com/pypa/sampleproject
 """
-
-
 import os
 from setuptools import setup, find_packages
 
@@ -36,8 +34,7 @@ setup(
 		'Intended Audience :: Science/Research',
 		'Topic :: Scientific/Engineering :: Computer Vision :: Natural Language Processing',
 
-		'Programming Language :: Python :: 3.6',
-		'Programming Language :: Python :: 3.7',
+		'Programming Language :: Python :: 3.8',
 	],
 	python_requires='>=3.6',
 	)

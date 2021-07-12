@@ -1,0 +1,28 @@
+name: storyteller
+
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+  - pytorch
+
+dependencies:
+  # Core stack
+  - python>=3.8
+  - h5py
+  - numpy
+  - scipy
+  - pytorch
+  - pytorch-gpu
+
+  # CV Packages
+  - torchvision
+  - scikit-image
+
+  # NLP Packages
+  - nltk
+  - spacy==3.1.0
+
+  # Visualization stack
+  - matplotlib
+  - jupyter
