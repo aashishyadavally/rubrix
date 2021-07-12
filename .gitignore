@@ -4,8 +4,8 @@ __pycache__/
 *$py.class
 
 # Assets
-hodor/assets/data/images/
-hodor/assets/models/
+storyteller/assets/data/images/
+storyteller/assets/models/
 
 # C extensions
 *.so

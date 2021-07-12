@@ -18,17 +18,17 @@ setup(
 	#
 	# It will live on PyPi at:
 	#		https://pypi.org/project/toxcom/
-	name='hodor',
+	name='storyteller',
 	# Versions should comply with PEP 440 : 
 	# 		https://www.python.org/dev/peps/pep-0440/
 	version='0.0.1-dev',
 	# Packages can be manually mentioned, or `setuptools.find_packages`
 	# can be used for this purpose.
 	packages=find_packages(),
-	description='Keyword-Based Image Search Tool',
+	description='Keyword-Based Image Caption Retrieval Tool',
 	long_description=long_description,
 	# Corresponds to the Home Page of the metadata field
-	url='https://github.com/aashishyadavally/hodor',
+	url='https://github.com/aashishyadavally/storyteller',
 	# Name and email addresses of project owners.
 	author='Aashish Yadavally',
 	author_email='aashish.yadavally1995@gmail.com',
