@@ -14,6 +14,8 @@ dependencies:
   - scipy
   - pytorch
   - pytorch-gpu
+  - tensorflow
+  - tensorflow-gpu
 
   # CV Packages
   - torchvision
@@ -26,3 +28,7 @@ dependencies:
   # Visualization stack
   - matplotlib
   - jupyter
+
+  - pip
+  - pip:
+     - opencv-python
