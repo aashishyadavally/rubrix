@@ -6,6 +6,7 @@ __pycache__/
 # Assets
 storyteller/assets/data/images/
 storyteller/assets/models/
+storyteller/assets/index.json
 
 # C extensions
 *.so
