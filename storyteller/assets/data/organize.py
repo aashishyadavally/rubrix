@@ -1,7 +1,6 @@
 import sys
 import json
 import shutil
-import random
 import argparse
 from pathlib import Path
 
@@ -22,11 +21,9 @@ def split_data(folder, train_size):
             List of images belonging to train and validation sets
             respectively.
     """
-    images = list(folder.iterdir())
+    images = sorted(list(folder.iterdir()))
     n_train = int(train_size * len(images))
-
-    train_images = random.sample(images, n_train)
-    val_images = [img for img in images if img not in train_images]
+    train_images, val_images = images[:n_train], images[n_train:]
 
     return train_images, val_images
 
@@ -119,7 +116,7 @@ def remove(folder, file):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Organize data for show-and-tell.')
+    parser = argparse.ArgumentParser(description='Organize data folder.')
     parser.add_argument('--images', dest='images_folder', type=str,
                         default='images/flickr8k', help='Image directory name.')
     parser.add_argument('--captions', dest='captions', type=str,
