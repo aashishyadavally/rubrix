@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Assets
-storyteller/assets/data/images/
+storyteller/assets/data
 storyteller/assets/models/
 storyteller/assets/index.json
 
