@@ -1,7 +1,7 @@
 # AI Based Visual Search Engine
 
 ## Project Description
-This project uses a combined similarity search based on criteria such as objects, captions for an image to retrieve relevant images.
+This project uses a combined similarity search based on criteria such as objects within an image, and text captions for an image to retrieve relevant images.
 
 ## Getting Started
 This section describes the preqrequisites, and contains instructions, to get the project up and running.
@@ -26,7 +26,7 @@ Once the prerequisites have been installed, follow these instructions to build t
   1. Navigate to `storyteller/search` directory.
   2. Run the bash script `setup.sh` with the following command: 
   
-     `$ bash yolo-setup.sh` 
+     `$ bash setup.sh` 
    
    This downloads the [flickr8k](https://www.kaggle.com/adityajn105/flickr8k?select=captions.txt) dataset using the Kaggle API and sets up an image/embedding index.
      
