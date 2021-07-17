@@ -1,32 +1,52 @@
+"""Utilities to extract similar words/sentences, semantic similarity
+scores from various metrics, etc.
+"""
 import sys
 import heapq
-import subprocess
 from pathlib import Path
+
+from scipy.spatial.distance import cosine, euclidean
 
 import spacy
 
 from storyteller import pathfinder
+from storyteller.utils.lang import retrieve_spacy_model, SPACY_MODEL_MEDIUM
 
 
-def retrieve_spacy_language(lang):
-    """Retrieves trained language pipeline from within SpaCy.
-    If not available, it is downloaded.
+def cosine_distance(array, other_array):
+    """Computes the cosine distance between two 1-D arrays.
 
     Arguments:
     ----------
-        lang (str):
-            Key to trained SpaCy language pipeline.
+        array (array_like object):
+            Input array.
+        other_array (array_like object):
+            Input array.
 
     Returns:
     --------
-        model (spacy.lang)
-            Trained SpaCy language pipeline.
+        (float):
+            Cosine distance.
     """
-    if not spacy.util.is_package(lang):
-        subprocess.call(f'python -m spacy download {lang}', shell=True)
+    return cosine(array, other_array)
 
-    model = spacy.load(lang)
-    return model
+
+def euclidean_distance(array, other_array):
+    """Computes the Euclidean distance between two 1-D arrays.
+
+    Arguments:
+    ----------
+        array (array_like object):
+            Input array.
+        other_array (array_like object):
+            Input array.
+
+    Returns:
+    --------
+        (float):
+            Euclidean distance.
+    """
+    return euclidean(array, other_array)
 
 
 def get_similar_words(word, names_file, n=3):
@@ -55,7 +75,7 @@ def get_similar_words(word, names_file, n=3):
         print('PathError: Path to names file is incorrect.')
         sys.exit()
 
-    model = retrieve_spacy_language('en_core_web_md')
+    model = retrieve_spacy_model(SPACY_MODEL_MEDIUM)
 
     word = model(word)
     word_similarities = [word.similarity(model(name)) for name in names]
@@ -72,5 +92,9 @@ def get_similar_words(word, names_file, n=3):
 
 # TODO: Test function - remove before moving to production.
 if __name__ == '__main__':
+    import time
+    start = time.time()
     words = get_similar_words('music', 'coco.names')
     print(words)
+    end = time.time()
+    print(f'Time to get similar words: {end - start}')
