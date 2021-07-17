@@ -19,10 +19,10 @@ This project can easily be set up with all the prerequisite packages by followin
      `$ pip install .`
 
 Once the prerequisites have been installed, follow these instructions to build the project:
-  1. Navigate to `storyteller/assets/data` folder and download the `flickr64k` dataset from the following [link](https://www.kaggle.com/adityajn105/flickr8k?select=captions.txt).
-  2. To organize the data into `train` and `val` folders respectively, use the following commands:
+  1. Navigate to `storyteller/assets/data` folder and download the `flickr8k` dataset from the following [link](https://www.kaggle.com/adityajn105/flickr8k?select=captions.txt).
+  2. To organize the data into `train` and `val` folders respectively, call `organize.py` with the file locations of the `images` folder and the `captions.txt` file. For example, if you extracted the archive file from the link above into the same folder of organize.py, you might need to run:
      
-     `$ python organize.py`
+     `python organize.py --images archive/images --captions archive/captions.txt`
   3. Next, navigate to `storyteller/search` folder. Run the bash script `yolo-setup.sh` to set up `darknet` folder to enable object detection for the images dataset. 
      
      `$ bash yolo-setup.sh` 
