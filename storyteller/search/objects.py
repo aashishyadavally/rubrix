@@ -172,8 +172,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.images_path is None:
-        images_path = pathfinder.get('storyteller', 'assets', 'data',
-                                     'images', 'val')
+        images_path = pathfinder.get('storyteller', 'assets', 'data', 'val')
     else:
         images_path = Path(args.images_path)
 
