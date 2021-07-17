@@ -1,11 +1,14 @@
-# Storyteller : Image Search and Caption Generating Application
+# AI Based Visual Search Engine
 
 ## Project Description
+This project uses a combined similarity search based on criteria such as objects, captions for an image to retrieve relevant images.
 
 ## Getting Started
 This section describes the preqrequisites, and contains instructions, to get the project up and running.
 
 ### Setup
+
+#### 1. Project Environment
 This project can easily be set up with all the prerequisite packages by following these instructions:
   1. Install [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) using the `conda_install.sh` file, with the command: `$ bash conda_install.sh`
   2. Create a conda environment from the included `environment.yml` file using the following command:
@@ -18,15 +21,15 @@ This project can easily be set up with all the prerequisite packages by followin
      
      `$ pip install .`
 
+#### 2. Data Assets
 Once the prerequisites have been installed, follow these instructions to build the project:
-  1. Navigate to `storyteller/assets/data` folder and download the `flickr8k` dataset from the following [link](https://www.kaggle.com/adityajn105/flickr8k?select=captions.txt).
-  2. To organize the data into `train` and `val` folders respectively, call `organize.py` with the file locations of the `images` folder and the `captions.txt` file. For example, if you extracted the archive file from the link above into the same folder of organize.py, you might need to run:
-     
-     `python organize.py --images archive/images --captions archive/captions.txt`
-  3. Next, navigate to `storyteller/search` folder. Run the bash script `yolo-setup.sh` to set up `darknet` folder to enable object detection for the images dataset. 
-     
+  1. Navigate to `storyteller/search` directory.
+  2. Run the bash script `setup.sh` with the following command: 
+  
      `$ bash yolo-setup.sh` 
-
+   
+   This downloads the [flickr8k](https://www.kaggle.com/adityajn105/flickr8k?select=captions.txt) dataset using the Kaggle API and sets up an image/embedding index.
+     
      
 ### Usage
 
