@@ -204,13 +204,13 @@ if __name__ == '__main__':
     captions_file = pathfinder.get('storyteller', 'assets', 'data', 'captions.txt')
 
     # Validate Kaggle API Credentials
-#    validate_api_credentials()
+    validate_api_credentials()
 
     # Download Kaggle dataset and place in storyteller/assets/data.
-#    download_and_extract(DATASET_ID, DATASET_DIR)
+    download_and_extract(DATASET_ID, DATASET_DIR)
 
     # Split data into train and validation sets.
     train_imgs, val_imgs = split_data(imgs_dir, args.train_size)
-#    move_images(imgs_dir, train_imgs, val_imgs)
+    move_images(imgs_dir, train_imgs, val_imgs)
     txt_to_json(captions_file, val_imgs)
-#    remove(imgs_dir, captions_file)
+    remove(imgs_dir, captions_file)
