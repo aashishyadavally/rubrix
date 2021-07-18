@@ -58,7 +58,7 @@ def extract_features(text):
     1. Custom logic can be implemented here to extract features
     according to the list of objects in the dataset.
 
-    2. There's a 3X speed markup in using small v/s large versions of trained
+    2. There's a 3X speed markup in using small v/s medium versions of trained
     English language pipelines. Furthermore, accuracy of POS Tagging models
     for both are 0.97, and the F-scores for named-entity recognition are 0.84
     and 0.85 respectively. Recommend using the medium pipeline for word2vec
