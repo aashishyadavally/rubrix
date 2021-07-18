@@ -76,6 +76,11 @@ def get_similar_words(word, names_file, n=3):
         sys.exit()
 
     model = retrieve_spacy_model(SPACY_MODEL_MEDIUM)
+    # Disabling pipeline components computing linguistic features saves
+    # time, as these components are not necessary for word2vec similarity
+    # score computation.
+    model.disable_pipes(['tok2vec', 'tagger', 'parser', 'attribute_ruler',
+                         'lemmatizer', 'ner'])
 
     word = model(word)
     word_similarities = [word.similarity(model(name)) for name in names]
@@ -86,7 +91,6 @@ def get_similar_words(word, names_file, n=3):
     most_similar_words_idx = [elem[0] for elem in most_similar_tuples]
 
     most_similar_words = [names[idx] for idx in most_similar_words_idx]
-
     return most_similar_words
 
 
