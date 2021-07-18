@@ -8,6 +8,9 @@ storyteller/assets/data
 storyteller/assets/models/
 storyteller/assets/index.json
 
+# Darknet Repo
+storyteller/search/darknet
+
 # C extensions
 *.so
 
