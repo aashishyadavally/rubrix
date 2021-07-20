@@ -7,6 +7,7 @@ __pycache__/
 storyteller/assets/data
 storyteller/assets/models/
 storyteller/assets/index.json
+storyteller/assets/imageEmbeddingLocations.json
 
 # Darknet Repo
 storyteller/search/darknet
