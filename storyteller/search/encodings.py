@@ -67,11 +67,11 @@ def embedd_captions(model, captions_path, this_embeddings_folder):
             # the .npy file.
             filename = f"{image_id[:-4]}_{len(ids_to_numpy_paths[image_id]) + 1}.npy"
             numpy_path = Path(this_embeddings_folder) / filename
-            ids_to_numpy_paths[image_id].append(numpy_path)
+            ids_to_numpy_paths[image_id].append(str(numpy_path))
         else:
             # If this is the first time this image has been embedded, then _1
             numpy_path = Path(this_embeddings_folder) / f"{image_id[:-4]}_1.npy"
-            ids_to_numpy_paths[image_id] = [numpy_path]
+            ids_to_numpy_paths[image_id] = [str(numpy_path)]
 
         # Do the embedding
         embedd_tensor = model([caption]) # (1, 512) tensor
@@ -113,4 +113,4 @@ if __name__ == '__main__':
                                              "imageEmbeddingLocations.json")
 
     with open(json_embedding_location, 'w') as embedding_file:
-        json.dump(str(ids_to_paths), embedding_file, indent=4)
+        json.dump(ids_to_paths, embedding_file, indent=4)
