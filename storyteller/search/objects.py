@@ -110,31 +110,39 @@ def detect_objects(net, labels, image, confidence_threshold):
                 class_ids.append(class_id)
 
     objects = set([labels[i] for i in class_ids])
-
     return objects
 
 
 def create_index(images_path, weights_path, cfg_path, names_path, thresh):
-    """Creates an image index mapping objects in ``names_path`` to image files
-    containing the object. JSON file is written to /assets directory.
+    """Creates an image index mapping objects in ``names_path`` to image
+    files containing the object. JSON file is written to /assets directory.
 
     Arguments:
     ----------
-        images_path (pathlib.Path):
-            Path to images directory.
+        images_path (pathlib.Path or list of pathlib.Path):
+            Path to images directory / List of paths to multiple image
+            directories.
         weights_path (pathlib.Path):
             Path to YOLOv4 pretrained weights file.
         cfg_path (pathlib.Path):
             Path to darknet configuration file.
         names_path (pathlib.Path):
-            Path to darknet names file.    
+            Path to darknet names file.
         thresh (float):
-            Confidence level threshold.        
+            Confidence level threshold.
     """
     # Retrieve YOLOv4 model related variables to detect objects in an image.
     net = get_yolo_net(cfg_path, weights_path)
     labels = get_labels(names_path)
-    image_paths = list(images_path.iterdir())
+
+    image_paths = []
+    if isinstance(images_path, Path):
+        image_paths = list(images_path.iterdir())
+    elif isinstance(images_path, list):
+        image_paths = []
+        for paths in images_path:
+            image_paths += list(paths.iterdir())
+
     index = dict(zip(labels, [[] for _ in range(len(labels))]))
 
     for _id in tqdm(range(len(image_paths))):
@@ -153,7 +161,6 @@ def create_index(images_path, weights_path, cfg_path, names_path, thresh):
         json.dump(index, index_file, indent=4)
 
     print('[INFO] Index creation successful.')
-    return
 
 
 if __name__ == "__main__":
@@ -172,7 +179,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.images_path is None:
-        images_path = pathfinder.get('storyteller', 'assets', 'data', 'val')
+        images_path = [
+            pathfinder.get('storyteller', 'assets', 'data', 'train'),
+            pathfinder.get('storyteller', 'assets', 'data', 'val'),
+        ]
     else:
         images_path = Path(args.images_path)
 
@@ -190,10 +200,9 @@ if __name__ == "__main__":
 
     if args.names_path is None:
         names_path = pathfinder.get('storyteller', 'search', 'darknet',
-                                     'data', 'coco.names')
+                                    'data', 'coco.names')
     else:
         names_path = Path(args.names_path)
-
 
     create_index(images_path, weights_path, cfg_path, names_path,
                  args.confidence_threshold)
