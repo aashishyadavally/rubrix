@@ -1,91 +1,116 @@
+"""Accesses the Universal Sentence Encoder to get sentence level embeddings
+and saves them as numpy files for the text captions corresponding to the
+images in the dataset.
+"""
 import json
-import os
-import tensorflow_hub as hub
+import argparse
+from pathlib import Path
+
 import numpy as np
+
+import tensorflow_hub as hub
+
+from tqdm import tqdm
+
 from storyteller import pathfinder
 
-images_path = "../assets/data"
-train_captions_path = images_path + "/train_captions.json"
-val_captions_path = images_path + "/val_captions.json"
+
+# Tensorflow hub link for Universal Sentence Encoder (large).
+MODULE_URL = "https://tfhub.dev/google/universal-sentence-encoder-large/5"
 
 
-
-########Load in the embedding model######
-###Maybe change this part to load from locally stored model
-module_url = "https://tfhub.dev/google/universal-sentence-encoder-large/5"
-    #Loading in the large/5 model
-model = hub.load(module_url)
-    #Now model( list_of_strings ) will embedd the strings in a (numstrings,512) tensor
-
-embeddings_folder = str(pathfinder.get("storyteller","assets","data","embeddings"))
-##Ensure the encodings folder exists
-if not os.path.exists(embeddings_folder):
-    os.mkdir(embeddings_folder)
-
-
-def embedd_captions(captions_path,this_embeddings_folder):
+def embedd_captions(model, captions_path, this_embeddings_folder):
     """
-    embedds all the captions in a json file at captions_path into separate numpy files
-    and returns a dictionary of image_id:path_to_embedding
+    Encodes all the captions in a JSON file at `captions_path` into separate
+    .npy files and returns a dictionary mapping image identifiers to
+    paths of corresponding sentence embedding files.
 
     Arguments:
-    ------
-        captions_path (string):
-            path to the captions.json to embedd
+    ----------
+        model (tensorflow.saved_model):
+            Universal sentence encoder (large) tensorflow saved model.
+        captions_path (pathlib.Path or list of pathlib.Path objects):
+            Path to the captions JSON file / List of paths to multiple
+            captions JSON files.
         this_embeddings_folder (string):
-            path to the folder to store the numpy embeddings in
+            Path to the folder to store .npy files corresponding to the
+            sentence embeddings.
 
     Returns:
     --------
         ids_to_numpy_paths (dict):
-            ids_to_numpy_paths[image_id] -> a list of the absolute paths of
-            the numpy embeddings of all captions of image_id
+            ids_to_numpy_paths[image_id] -> a list of the absolute paths
+            of the numpy embeddings of all captions of image_id
     """
-    #Initialize the output
+    # Initialize the output
     ids_to_numpy_paths = {}
-    #Load in the data
-    with  open( captions_path, "r") as captions_file:
-        ids_captions = json.load(captions_file)["contents"]
 
-    i = 0
-    for caption_pair in ids_captions:
-        i+=1
-        if i % 1000==0:
-            print(i)
-            
+    # Load in the data
+    ids_captions = []
+
+    if isinstance(captions_path, Path):
+        with open(captions_path, "r") as captions_file:
+            ids_captions = json.load(captions_file)["contents"]
+    elif isinstance(captions_path, list):
+        for path in captions_path:
+            with open(path, "r") as captions_file:
+                ids_captions += json.load(captions_file)["contents"]
+
+    for _id in tqdm(range(len(ids_captions))):
+        caption_pair = ids_captions[_id]
         caption = caption_pair["caption"]
         image_id = caption_pair["image_id"]
+
         if image_id in ids_to_numpy_paths.keys():
-            #if this is not the first time the image has been embedded then we need to
-            #add a _(#imagesalreadyembedded+1) to the path of the .npy
-            numpy_path = this_embeddings_folder + "/" + image_id[:-4] + "_" \
-                    + str(len(ids_to_numpy_paths[image_id]) + 1) + ".npy"
+            # if this is not the first time the image has been embedded then
+            # we need to add a "_(#Images_Already_Embedded + 1)" to the path of
+            # the .npy file.
+            filename = f"{image_id[:-4]}_{len(ids_to_numpy_paths[image_id]) + 1}.npy"
+            numpy_path = Path(this_embeddings_folder) / filename
             ids_to_numpy_paths[image_id].append(numpy_path)
         else:
-            #If this is the first time this image has been embedded, then _1
-            numpy_path = this_embeddings_folder + "/" + image_id[:-4] + "_1.npy"
+            # If this is the first time this image has been embedded, then _1
+            numpy_path = Path(this_embeddings_folder) / f"{image_id[:-4]}_1.npy"
             ids_to_numpy_paths[image_id] = [numpy_path]
-        ##Do the embedding
-        embedd_tensor = model( [caption] ) #(1,512) tensor
-        embedd_numpy = embedd_tensor.numpy()[0] #(512,) numpy array
-        np.save(numpy_path,embedd_numpy)
+
+        # Do the embedding
+        embedd_tensor = model([caption]) # (1, 512) tensor
+        embedd_numpy = embedd_tensor.numpy()[0] # (512, ) numpy array
+        np.save(numpy_path, embedd_numpy)
 
     return ids_to_numpy_paths
 
 
-val_ids_to_paths = embedd_captions(val_captions_path,embeddings_folder)
-train_and_val = True
-if train_and_val:
-    train_ids_to_paths = embedd_captions(train_captions_path,embeddings_folder)
-    final_dict = {**val_ids_to_paths, **train_ids_to_paths}
-else:
-    final_dict = val_ids_to_paths
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Generate sentence embeddings.")
+    parser.add_argument('--captions', dest='captions_path', type=str,
+                        help='Path to image captions.')
 
-json_embedding_locations = str(pathfinder.get("storyteller","assets","data")) \
-                                + "/imageEmbeddingLocations.json"
+    args = parser.parse_args()
 
+    if args.captions_path is None:
+        captions_path = [
+            pathfinder.get('storyteller', 'assets', 'data', 'train_captions.json'),
+            pathfinder.get('storyteller', 'assets', 'data', 'val_captions.json'),
+        ]
+    else:
+        captions_path = Path(args.captions_path)
 
+    # Folder to store .npy files corresponding to dataset sentence embeddings.
+    embeddings_folder = pathfinder.get("storyteller", "assets", "data",
+                                       "embeddings")
+    embeddings_folder.mkdir(exist_ok=True)
 
-jsonfile = open(json_embedding_locations,'w')
-json.dump(final_dict,jsonfile, indent = 4)
-jsonfile.close()
+    # Loading in the large/5 model
+    # MODEL( list_of_strings ) will embedd the strings in a (numstrings,512)
+    # tensor.
+    # TODO: Maybe change this part to load from locally stored model.
+    model = hub.load(MODULE_URL)
+
+    ids_to_paths = embedd_captions(model, captions_path, embeddings_folder)
+
+    json_embedding_location = pathfinder.get("storyteller", "assets",
+                                             "imageEmbeddingLocations.json")
+
+    with open(json_embedding_location, 'w') as embedding_file:
+        json.dump(str(ids_to_paths), embedding_file, indent=4)
