@@ -8,6 +8,7 @@ storyteller/assets/data
 storyteller/assets/models/
 storyteller/assets/index.json
 storyteller/assets/imageEmbeddingLocations.json
+storyteller/assets/predictions
 
 # Darknet Repo
 storyteller/search/darknet
