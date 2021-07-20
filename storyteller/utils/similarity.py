@@ -3,14 +3,33 @@ scores from various metrics, etc.
 """
 import sys
 import heapq
-from pathlib import Path
+
+import numpy as np
 
 from scipy.spatial.distance import cosine, euclidean
 
-import spacy
-
 from storyteller import pathfinder
 from storyteller.utils.lang import retrieve_spacy_model, SPACY_MODEL_MEDIUM
+
+
+def dot_product(array, other_array):
+    """Computes dot product of two arrays as a distance metric.
+    It is a variation of cosine distance and is useful in cases
+    where the length varies, and captures semantic information.
+
+    Arguments:
+    ----------
+        array (array_like object):
+            Input array.
+        other_array (array_like object):
+            Input array.
+
+    Returns:
+    --------
+        (float):
+            Dot product.
+    """
+    return np.inner(array, other_array)
 
 
 def cosine_distance(array, other_array):
@@ -86,10 +105,9 @@ def get_similar_words(word, names_file, n=3):
     word_similarities = [word.similarity(model(name)) for name in names]
 
     most_similar_tuples = heapq.nlargest(n,
-                                         enumerate(word_similarities), 
+                                         enumerate(word_similarities),
                                          key=lambda x: x[1])
     most_similar_words_idx = [elem[0] for elem in most_similar_tuples]
-
     most_similar_words = [names[idx] for idx in most_similar_words_idx]
     return most_similar_words
 

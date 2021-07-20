@@ -1,9 +1,15 @@
+"""Downloads Flickr8k dataset using the Kaggle API and sets up
+storyteller/assets by creating train and val splits of the dataset.
+
+Furthermore, an inverse index file ``index.json`` is created which maps
+the objects in darknet/data/coco.names to the paths of the images
+containing them.
+"""
 import sys
 import json
 import shutil
 import argparse
 import zipfile
-import shutil
 import subprocess
 from pathlib import Path
 
@@ -15,7 +21,7 @@ DATASET_DIR = "flickr8k.zip"
 
 
 def validate_api_credentials():
-    """Validate Kaggle API user credentials. 
+    """Validate Kaggle API user credentials.
     """
     msg = ("In order to use the Kaggle’s public API, you must first \n"
            "authenticate using an API token. Please go to the \"Account\"\n"
@@ -77,8 +83,6 @@ def download_and_extract(dataset_id, dataset_dir):
 
     # Remove copied Images directory from source.
     remove(source / 'Images', Path(dataset_dir))
-
-    return
 
 
 def split_data(dir, train_size):
@@ -153,7 +157,7 @@ def txt_to_json(file, val_images):
         # Considering valiation set is much smaller than the train-set,
         # it is optimal to check membership with this.
         _item = {
-        	"image_id": items[0],
+            "image_id": items[0],
         	"caption": caption
         }
         if filename in val_images:
@@ -184,14 +188,13 @@ def remove(dir, file):
         dir (pathlib.Path):
             Path to images dir.
         file (pathlib.Path):
-            Path to file containing captions.   
+            Path to file containing captions.
     """
     if dir is not None:
         shutil.rmtree(dir)
 
     if file is not None:
         file.unlink()
-    return
 
 
 if __name__ == '__main__':

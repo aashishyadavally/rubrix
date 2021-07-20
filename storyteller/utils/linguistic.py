@@ -76,7 +76,7 @@ def extract_features(text):
     """
     model = retrieve_spacy_model(SPACY_MODEL_SMALL)
     text = model(text)
-    
+
     features = []
 
     entity_labels = [entity.label_.lower() for entity in text.ents]
