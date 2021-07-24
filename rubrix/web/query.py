@@ -11,6 +11,7 @@ import numpy as np
 import tensorflow_hub as hub
 
 from storyteller import pathfinder
+from storyteller.search.objects import get_yolo_net, get_labels, detect_objects
 from storyteller.search.encodings import MODULE_URL
 from storyteller.utils.linguistic import extract_features
 from storyteller.utils.similarity import get_similar_words, cosine_distance, dot_product
@@ -143,20 +144,24 @@ def query_by_text(text, model):
     return results
 
 
-def query_by_image(image):
+def query_by_image(image_path, weights_path, cfg_path, names_path, thresh):
     """Processes user-uploaded image to retrieve similar images from database.
 
     Arguments:
     ----------
         image (numpy.ndarray):
-            User-uploaded image for reverse-image search.
+            Path for user-uploaded image, for reverse-image search.
 
     Returns:
     --------
         results (list of pathlib.Path objects):
             List of paths to images retrieved for user query.
     """
-    pass
+    net = get_yolo_net(cfg_path, weights_path)
+    labels = get_labels(names_path)
+    image = cv2.imread(str(image_path))
+    objects = detect_objects(net, labels, image, thresh)
+
 
 
 def save_predictions(results):
@@ -179,16 +184,4 @@ def save_predictions(results):
 
 if __name__ == '__main__':
     model = hub.load(MODULE_URL)
-    results = query_by_text("John kicked a ball", model)
-
-    weights_path = pathfinder.get('storyteller', 'assets', 'models',
-                                  'yolov4.weights')
-
-    cfg_path = pathfinder.get('storyteller', 'search', 'darknet',
-                              'cfg', 'yolov4.cfg')
-
-    names_path = pathfinder.get('storyteller', 'search', 'darknet',
-                                'data', 'coco.names')
-
-    path_to_upload = pathfinder.get('storyteller', 'assets', 'data',
-                                    'uploads', )
+#    results = query_by_text("John threw a ball", model)

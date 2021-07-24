@@ -12,7 +12,7 @@ import tensorflow_hub as hub
 
 from tqdm import tqdm
 
-from storyteller import pathfinder
+from rubrix import pathfinder
 
 
 # Tensorflow hub link for Universal Sentence Encoder (large).
@@ -90,14 +90,14 @@ if __name__ == '__main__':
 
     if args.captions_path is None:
         captions_path = [
-            pathfinder.get('storyteller', 'assets', 'data', 'train_captions.json'),
-            pathfinder.get('storyteller', 'assets', 'data', 'val_captions.json'),
+            pathfinder.get('rubrix', 'assets', 'data', 'train_captions.json'),
+            pathfinder.get('rubrix', 'assets', 'data', 'val_captions.json'),
         ]
     else:
         captions_path = Path(args.captions_path)
 
     # Folder to store .npy files corresponding to dataset sentence embeddings.
-    embeddings_folder = pathfinder.get("storyteller", "assets", "data",
+    embeddings_folder = pathfinder.get("rubrix", "assets", "data",
                                        "embeddings")
     embeddings_folder.mkdir(exist_ok=True)
 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
     ids_to_paths = embedd_captions(model, captions_path, embeddings_folder)
 
-    json_embedding_location = pathfinder.get("storyteller", "assets",
+    json_embedding_location = pathfinder.get("rubrix", "assets",
                                              "imageEmbeddingLocations.json")
 
     with open(json_embedding_location, 'w') as embedding_file:

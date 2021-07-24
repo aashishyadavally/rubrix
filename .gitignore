@@ -4,14 +4,19 @@ __pycache__/
 *$py.class
 
 # Assets
-storyteller/assets/data
-storyteller/assets/models/
-storyteller/assets/index.json
-storyteller/assets/imageEmbeddingLocations.json
-storyteller/assets/predictions
+rubrix/assets/data
+rubrix/assets/models/
+rubrix/assets/index.json
+rubrix/assets/imageEmbeddingLocations.json
+rubrix/assets/predictions
 
 # Darknet Repo
-storyteller/search/darknet
+rubrix/search/darknet
+
+# Website
+rubrix/web/static
+rubrix/web/templates
+rubrix/main.py
 
 # C extensions
 *.so

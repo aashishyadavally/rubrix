@@ -6,14 +6,14 @@ set -e
 # Download data
 echo "[INFO] Stage 1/8: Downloading data using Kaggle API"
 echo ""
-echo "Optional arguments to ``data.py``."
+echo "Optional arguments to ``download.py``."
 echo "Note: Add arguments to line 17 containing python run command"
 echo "to move away from default settings."
 echo ""
 echo "  --train_size TRAIN_SIZE           Percentage of files in train-set."
 echo ""
 PYTHON_PATH=$(which python)
-$PYTHON_PATH data.py
+$PYTHON_PATH download.py
 echo "[INFO] Stage 1/8: Complete."
 echo ""
 

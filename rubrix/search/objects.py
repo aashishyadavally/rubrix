@@ -17,7 +17,7 @@ import numpy as np
 
 from tqdm import tqdm
 
-from storyteller import pathfinder
+from rubrix import pathfinder
 
 
 def get_yolo_net(cfg_path, weights_path):
@@ -155,7 +155,7 @@ def create_index(images_path, weights_path, cfg_path, names_path, thresh):
             _paths.append(str(image_path))
             index[object] = _paths
 
-    index_path = pathfinder.get('storyteller', 'assets', 'index.json')
+    index_path = pathfinder.get('rubrix', 'assets', 'index.json')
 
     with open(index_path, 'w') as index_file:
         json.dump(index, index_file, indent=4)
@@ -164,7 +164,7 @@ def create_index(images_path, weights_path, cfg_path, names_path, thresh):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Create image index.')
+    parser = argparse.ArgumentParser(description='Create inverse image index.')
     parser.add_argument('--images', dest='images_path', type=str,
                         help='Path to images directory.')
     parser.add_argument('--weights', dest='weights_path', type=str,
@@ -180,26 +180,26 @@ if __name__ == "__main__":
 
     if args.images_path is None:
         images_path = [
-            pathfinder.get('storyteller', 'assets', 'data', 'train'),
-            pathfinder.get('storyteller', 'assets', 'data', 'val'),
+            pathfinder.get('rubrix', 'assets', 'data', 'train'),
+            pathfinder.get('rubrix', 'assets', 'data', 'val'),
         ]
     else:
         images_path = Path(args.images_path)
 
     if args.weights_path is None:
-        weights_path = pathfinder.get('storyteller', 'assets', 'models',
+        weights_path = pathfinder.get('rubrix', 'assets', 'models',
                                       'yolov4.weights')
     else:
         weights_path = Path(args.weights_path)
 
     if args.cfg_path is None:
-        cfg_path = pathfinder.get('storyteller', 'search', 'darknet',
+        cfg_path = pathfinder.get('rubrix', 'search', 'darknet',
                                   'cfg', 'yolov4.cfg')
     else:
         cfg_path = Path(args.cfg_path)
 
     if args.names_path is None:
-        names_path = pathfinder.get('storyteller', 'search', 'darknet',
+        names_path = pathfinder.get('rubrix', 'search', 'darknet',
                                     'data', 'coco.names')
     else:
         names_path = Path(args.names_path)

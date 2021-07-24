@@ -1,5 +1,5 @@
 """Downloads Flickr8k dataset using the Kaggle API and sets up
-storyteller/assets by creating train and val splits of the dataset.
+rubrix/assets by creating train and val splits of the dataset.
 
 Furthermore, an inverse index file ``index.json`` is created which maps
 the objects in darknet/data/coco.names to the paths of the images
@@ -13,7 +13,7 @@ import zipfile
 import subprocess
 from pathlib import Path
 
-from storyteller import pathfinder
+from rubrix import pathfinder
 
 
 DATASET_ID = "adityajn105/flickr8k"
@@ -68,15 +68,15 @@ def download_and_extract(dataset_id, dataset_dir):
     subprocess.run(f"kaggle datasets download -d {dataset_id}".split(),
         check=True)
 
-    source = pathfinder.get('storyteller', 'search')
-    dest_dir = pathfinder.get('storyteller', 'assets', 'data')
+    source = pathfinder.get('rubrix', 'search')
+    dest_dir = pathfinder.get('rubrix', 'assets', 'data')
 
     # Unzip downloaded data directory.
     _zip = zipfile.ZipFile(dataset_dir)
     _zip.extractall()
     _zip.close()
 
-    # Move downloaded flickr8k data to storyteller/assets/data.
+    # Move downloaded flickr8k data to rubrix/assets/data.
     shutil.copytree(str(source / 'Images'), str(dest_dir / 'images'),
                     dirs_exist_ok=True)
     shutil.move(str(source / 'captions.txt'), str(dest_dir))
@@ -203,13 +203,13 @@ if __name__ == '__main__':
                         default=0.8, help='Percentage of files in train-set')
     args = parser.parse_args()
 
-    imgs_dir = pathfinder.get('storyteller', 'assets', 'data', 'images')
-    captions_file = pathfinder.get('storyteller', 'assets', 'data', 'captions.txt')
+    imgs_dir = pathfinder.get('rubrix', 'assets', 'data', 'images')
+    captions_file = pathfinder.get('rubrix', 'assets', 'data', 'captions.txt')
 
     # Validate Kaggle API Credentials
     validate_api_credentials()
 
-    # Download Kaggle dataset and place in storyteller/assets/data.
+    # Download Kaggle dataset and place in rubrix/assets/data.
     download_and_extract(DATASET_ID, DATASET_DIR)
 
     # Split data into train and validation sets.

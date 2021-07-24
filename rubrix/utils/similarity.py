@@ -8,8 +8,8 @@ import numpy as np
 
 from scipy.spatial.distance import cosine, euclidean
 
-from storyteller import pathfinder
-from storyteller.utils.lang import retrieve_spacy_model, SPACY_MODEL_MEDIUM
+from rubrix import pathfinder
+from rubrix.utils.lang import retrieve_spacy_model, SPACY_MODEL_MEDIUM
 
 
 def dot_product(array, other_array):
@@ -85,7 +85,7 @@ def get_similar_words(word, names_file, n=3):
         most_similar_words (list):
             List of top-N similar words.
     """
-    names_path = pathfinder.get('storyteller', 'search', 'darknet',
+    names_path = pathfinder.get('rubrix', 'search', 'darknet',
                                 'data', names_file)
 
     try:

@@ -3,7 +3,7 @@ using trained language pipelines from SpaCy.
 """
 import spacy
 
-from storyteller.utils.lang import retrieve_spacy_model, SPACY_MODEL_SMALL
+from rubrix.utils.lang import retrieve_spacy_model, SPACY_MODEL_SMALL
 
 
 def extract_entities(text):
