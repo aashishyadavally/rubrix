@@ -13,11 +13,6 @@ rubrix/assets/predictions
 # Darknet Repo
 rubrix/search/darknet
 
-# Website
-rubrix/web/static
-rubrix/web/templates
-rubrix/main.py
-
 # C extensions
 *.so
 
