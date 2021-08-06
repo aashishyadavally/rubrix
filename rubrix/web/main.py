@@ -5,18 +5,20 @@ Possible alternative is to move to FastAPI or to integrate Flask app with celery
 """
 
 # Eun by typing python3 main.py in a terminal 
+import os
+import sys
+import json
+import shutil
+
 from werkzeug.utils import secure_filename
 from flask import Flask, flash, request, redirect, url_for, render_template, make_response
 from flask import send_from_directory
-import json
-import os
-import shutil
 
 import tensorflow_hub as hub
 
-from storyteller import pathfinder
-from storyteller.search.encodings import MODULE_URL
-from storyteller.web.query import query_by_text
+from rubrix
+from rubrix.search.encodings import MODULE_URL
+from rubrix.web.query import query_by_text
 
 
 MODEL = hub.load(MODULE_URL)
@@ -55,7 +57,7 @@ def search_post():
     print(f'Printing from search_post: {prompt}')
 
     retrieved_images = query_by_text(prompt, MODEL)
-    dst_path = pathfinder.get('storyteller', 'web', 'static', 'predictions')
+    dst_path = pathfinder.get('rubrix', 'web', 'static', 'predictions')
     print(dst_path)
     if dst_path.is_dir():
         shutil.rmtree(dst_path)
@@ -98,11 +100,6 @@ def reverse_search_post():
         return redirect(url_for('results', filename=filename))
 
 
-@app.route(base_url + '/results', methods=['GET'])
-def results(data):
-    return render_template('Results.html')
-
-
 if __name__ == "__main__":
     '''
     coding center code
@@ -111,6 +108,4 @@ if __name__ == "__main__":
     print(f"Try to open\n\n    https://{website_url}" + base_url + '\n\n')
     # remove debug=True when deploying it
     app.run(host = '0.0.0.0', port=port, debug=True, threaded=True)
-    import sys; sys.exit(0)
-
-
+    sys.exit(0)
