@@ -12,12 +12,15 @@ dependencies:
   - h5py
   - numpy
   - scipy
-  - pytorch
-  - tensorflow
   - tensorflow-hub
+  - scikit-learn
+
+  # CUDA stack
+  # Comment this stack while creating environment for CPU.
+  - cudnn==8.2.1
+  - cudatoolkit==11.3.1
 
   # CV Packages
-  - torchvision
   - scikit-image
 
   # NLP Packages
@@ -33,5 +36,6 @@ dependencies:
 
   - pip
   - pip:
+     - tensorflow==2.5.0
      - opencv-python
      - kaggle
