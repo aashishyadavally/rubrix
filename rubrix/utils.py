@@ -1,8 +1,10 @@
 """Contains important utilities which assist query procesing pipeline.
 """
 import sys
+import json
 import heapq
 import subprocess
+from pathlib import Path
 
 import numpy as np
 
@@ -58,7 +60,7 @@ def retrieve_spacy_model(lang):
 
 
 
-def extract_entities(text):
+def extract_entities(text, model=SPACY_MODEL_SMALL):
     """Utility to extract named-entity pairs from given text, according to
     the trained language pipeline from SpaCy.
 
@@ -66,19 +68,22 @@ def extract_entities(text):
     ----------
         text (str):
             Word/Phrase/Sentence
+        model (spacy.lang)
+            Trained SpaCy language pipeline.
+            By default, 'en-core-web-sm' is recommended for this utility.
 
     Returns:
     --------
         entities (list):
             List of tuples mapping named entities to corresponding labels.
     """
-    model = retrieve_spacy_model(SPACY_MODEL_SMALL)
+    model = retrieve_spacy_model(model)
     text = model(text)
     entities = [(entity.text, entity.label_) for entity in text.ents]
     return entities
 
 
-def extract_nouns(text):
+def extract_nouns(text, model=SPACY_MODEL_SMALL):
     """Utility to extract nouns from given text based on parts-of-speech
     tags extracted by trained language pipeline from SpaCy.
 
@@ -86,6 +91,9 @@ def extract_nouns(text):
     ----------
         text (str):
             Word/Phrase/Sentence
+        model (spacy.lang)
+            Trained SpaCy language pipeline.
+            By default, 'en-core-web-sm' is recommended for this utility.
 
     Returns:
     --------
@@ -93,13 +101,13 @@ def extract_nouns(text):
             List of tuples mapping tokens in the sentence to corresponding
             parts-of-speech tags.
     """
-    model = retrieve_spacy_model(SPACY_MODEL_SMALL)
+    model = retrieve_spacy_model(model)
     text = model(text)
     pos_tags = [(word.tag_, word.pos_) for word in text]
     return pos_tags
 
 
-def extract_features(text):
+def extract_features(text, model):
     """Utility to extract linguistic features based on a custom logic so as
     to enable object-based query filtering.
 
@@ -121,13 +129,16 @@ def extract_features(text):
     ----------
         text (str):
             Word/Phrase/Sentence
+        model (spacy.lang)
+            Trained SpaCy language pipeline.
+            By default, 'en-core-web-sm' is recommended for this utility.
 
     Returns:
     --------
         features (list):
             List of extracted features.
     """
-    model = retrieve_spacy_model(SPACY_MODEL_SMALL)
+    model = retrieve_spacy_model(model)
     text = model(text)
 
     features = []
