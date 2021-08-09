@@ -4,17 +4,16 @@ __pycache__/
 *$py.class
 
 # Assets
-rubrix/assets/data
-rubrix/assets/models/
-rubrix/assets/index.json
-rubrix/assets/imageEmbeddingLocations.json
-rubrix/assets/predictions
-
-# Do not add reverse image search module yet
-rubrix/reverse_search
+assets/data
+assets/models/
+assets/scaler
+assets/index.json
+assets/imageEmbeddingLocations.json
+assets/cluster_index.json
+assets/predictions
 
 # Darknet Repo
-rubrix/search/darknet
+rubrix/index/darknet
 
 # C extensions
 *.so
