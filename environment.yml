@@ -13,7 +13,6 @@ dependencies:
   - numpy
   - scipy
   - tensorflow-hub
-  - scikit-learn
 
   # CUDA stack
   # Comment this stack while creating environment for CPU.
@@ -39,3 +38,4 @@ dependencies:
      - tensorflow==2.5.0
      - opencv-python
      - kaggle
+     - scikit-learn
