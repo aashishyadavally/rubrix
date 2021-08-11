@@ -107,7 +107,7 @@ def extract_nouns(text, model=SPACY_MODEL_SMALL):
     return pos_tags
 
 
-def extract_features(text, model):
+def extract_features(text, model=SPACY_MODEL_SMALL):
     """Utility to extract linguistic features based on a custom logic so as
     to enable object-based query filtering.
 
@@ -240,7 +240,7 @@ def get_similar_words(word, names_file, n=3):
         most_similar_words (list):
             List of top-N similar words.
     """
-    names_path = pathfinder.get('rubrix', 'search', 'darknet',
+    names_path = pathfinder.get('rubrix', 'index', 'darknet',
                                 'data', names_file)
 
     try:
@@ -271,7 +271,7 @@ def fix_paths_in_index(index_path, emb_path):
     """Utility to fix paths in inverse image index file (``index.json``)
     and inverse embedding index file (``imageEmbeddingLocations.json``).
 
-    Running the bash script ``setup.sh`` in ``rubrix/search`` directory
+    Running the bash script ``setup.sh`` in ``rubrix/index`` directory
     sets up the inverse image index and image embedding index JSON files.
     However, this script takes close to an hour for completion.
 
@@ -301,3 +301,63 @@ def fix_paths_in_index(index_path, emb_path):
 
         with open(path_to_index, 'w') as index_file:
             json.dump(index, index_file, indent=4)
+
+
+class ElbowMethodVisualizer:
+    """Implements Elbow Method to help determine the optimal number of
+    clusters by fitting the model with a range of values of K.
+    """
+    def __init__(self, k_range):
+        """Initializes :class: ``ElbowMethodVisualizer``.
+
+        Arguments:
+        ----------
+            k_range (tuple):
+                Range of values of K for Elbow Method.
+        """
+        self.k_range = range(*k_range)
+        self.distortions = None
+        self.inertia = None
+
+    def fit(self, X):
+        """Fits multiple kMeans clustering models for K in :attr: ``k_range``.
+        Metrics such as distortion and inertia are computed for each value
+        of K.
+
+        Arguments:
+        ----------
+            X (numpy.ndarray):
+                Input data.
+        """
+        distortions, inertia = [], []
+
+        for k in self.k_range:
+            model = KMeans(n_clusters=k)
+            model.fit(X)
+
+            distortion = sum(np.min(cdist(X, model.cluster_centers_,
+                                         'euclidean'), axis=1)) / X.shape[0]
+            distortions.append(distortion)
+            inertia.append(model.inertia_)
+
+        self.distortions, self.inertia = distortions, inertia
+        return self
+
+    def plot(self):
+        """Plots elbow method using distortion and inertia to help
+        determine the optimal value of K.
+        """
+        fig, ax = plt.subplots(nrows=2, ncols=1)
+
+        ax[0].plot(self.k_range, self.distortions)
+        ax[0].set_title('Elbow method using Distortion')
+        ax[0].set_xlabel('k')
+        ax[0].set_ylabel('Distortion')
+
+        ax[1].plot(self.k_range, self.inertia)
+        ax[1].set_title('Elbow method using Inertia')
+        ax[1].set_xlabel('k')
+        ax[1].set_ylabel('Inertia')
+
+        path = pathfinder.get('assets', 'elbow_method.png')
+        fig.savefig(path)
