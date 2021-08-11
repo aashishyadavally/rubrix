@@ -90,10 +90,22 @@ echo "[INFO] Stage 6/9: Complete."
 echo ""
 
 
-echo "[INFO] Stage 7/9: Creating image index"
+echo "[INFO] Stage 7/9: Saving image descriptors for all images in database."
+echo ""
+echo "Optional arguments to ``descriptors.py``:"
+echo "Note: Add arguments to line 101 containing python run command"
+echo "to move away from default settings."
+echo ""
+echo "  --images    IMAGES_PATH           Path to images directory."
+PYTHON_PATH=$(which python)
+$PYTHON_PATH descriptors.py
+echo "[INFO] Stage 7/9: Complete."
+
+
+echo "[INFO] Stage 8/9: Creating image index"
 echo ""
 echo "Optional arguments to ``objects.py`` for creating image index:"
-echo "Note: Add arguments to line 105 containing python run command"
+echo "Note: Add arguments to line 118 containing python run command"
 echo "to move away from default settings."
 echo ""
 echo "  --images    IMAGES_PATH           Path to images directory."
@@ -103,28 +115,16 @@ echo "  --names     NAMES_PATH            Path to darknet names file."
 echo "  --thresh    CONFIDENCE_THRESHOLD  Confidence threshold."
 PYTHON_PATH=$(which python)
 $PYTHON_PATH objects.py
-echo "[INFO] Stage 7/9: Complete."
+echo "[INFO] Stage 8/9: Complete."
 
 
-echo "[INFO] Stage 8/9: Creating sentence encodings index"
+echo "[INFO] Stage 9/9: Creating sentence encodings index"
 echo ""
 echo "Optional arguments to ``encodings.py`` for creating sentence encodings index:"
-echo "Note: Add arguments to line 117 containing python run command"
+echo "Note: Add arguments to line 129 containing python run command"
 echo "to move away from default settings."
 echo ""
 echo "  --captions  CAPTIONS_PATH        Path to image captions."
 PYTHON_PATH=$(which python)
 $PYTHON_PATH encodings.py
-echo "[INFO] Stage 8/9: Complete."
-
-
-echo "[INFO] Stage 9/9: Saving image descriptors for all images in database."
-echo ""
-echo "Optional arguments to ``descriptors.py``:"
-echo "Note: Add arguments to line 129 containing python run command"
-echo "to move away from default settings."
-echo ""
-echo "  --images    IMAGES_PATH           Path to images directory."
-PYTHON_PATH=$(which python)
-$PYTHON_PATH descriptors.py
 echo "[INFO] Stage 9/9: Complete."
