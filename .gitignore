@@ -6,10 +6,8 @@ __pycache__/
 # Assets
 assets/data
 assets/models/
-assets/scaler
 assets/index.json
 assets/imageEmbeddingLocations.json
-assets/cluster_index.json
 assets/predictions
 
 # Darknet Repo
