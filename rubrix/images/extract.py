@@ -22,10 +22,10 @@ def extract_image_descriptors(path_to_image, model_name, target_size):
         path_to_image (pathlib.Path):
             Path to input image.
         model_name (str):
-            Key for instantiating CNN model architecture.            
+            Key for instantiating CNN model architecture.
         target_size (tuple):
-            Tuple of integers, dimensions to resize input images to.    
-    
+            Tuple of integers, dimensions to resize input images to.
+
     Returns:
     --------
         id_array (numpy.ndarray):
@@ -34,7 +34,9 @@ def extract_image_descriptors(path_to_image, model_name, target_size):
     preprocess_input = None
 
     if model_name == 'inception':
-        model = InceptionV3(include_top=False)
+        # Keras seems to return mixed_10 layer output and not of
+        # pool_3 layer if ``pooling`` parameter is not set to 'avg'.
+        model = InceptionV3(include_top=False, pooling='avg')
         preprocess_input = inception_preprocess_input
     elif model_name == 'vgg16':
         model = VGG19(include_top=False)
