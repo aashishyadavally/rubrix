@@ -10,7 +10,7 @@ from tqdm import tqdm
 import numpy as np
 
 from rubrix import pathfinder
-from rubrix.images.extract import extract_image_descriptors
+from rubrix.image.extract import extract_image_descriptors
 
 
 TARGET_SIZE = (299, 299)

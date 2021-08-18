@@ -14,7 +14,7 @@ import cv2
 from tqdm import tqdm
 
 from rubrix import pathfinder
-from rubrix.images.detect import get_yolo_net, get_labels, detect_objects
+from rubrix.image.detect import get_yolo_net, get_labels, detect_objects
 
 
 def create_index(images_path, weights_path, cfg_path, names_path, thresh):

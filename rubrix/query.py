@@ -17,8 +17,8 @@ import cv2
 from rubrix import pathfinder
 from rubrix.index.descriptors import TARGET_SIZE
 from rubrix.index.encodings import MODULE_URL
-from rubrix.images.extract import extract_image_descriptors
-from rubrix.images.detect import get_yolo_net, get_labels, detect_objects
+from rubrix.image.extract import extract_image_descriptors
+from rubrix.image.detect import get_yolo_net, get_labels, detect_objects
 from rubrix.utils import extract_features, get_similar_words, cosine_distance, dot_product
 
 
