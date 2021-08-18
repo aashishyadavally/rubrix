@@ -38,10 +38,7 @@ UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS=set(['.png', '.jpg', '.jpeg'])
 
 # Flask app set-up configuration
-print(pathfinder.get('rubrix', 'web', 'templates'))
-app = Flask(__name__,
-            template_folder=str(pathfinder.get('rubrix', 'web', 'templates')),
-            static_url_path='/static')
+app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
 
@@ -121,9 +118,7 @@ def search():
 @app.route('/', methods=['POST'])
 def search_post():
     prompt = request.json['prompt']
-    print(prompt)
     retrieved_images = query_by_text(prompt, MODEL)
-    print(retrieved_images)
     if retrieved_images != []:
         image_names = copy_results(retrieved_images)
         message = f"Image search results for \"{prompt}\":"
@@ -207,3 +202,7 @@ def launch():
     threading.Timer(1.25, lambda: webbrowser.open(url) ).start()
     app.run(host='localhost', port=PORT, debug=True, threaded=True)
     sys.exit(0)
+
+
+if __name__ == '__main__':
+    launch()
