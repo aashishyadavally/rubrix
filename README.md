@@ -80,6 +80,10 @@ What does this do?
      >>> path_to_emb = <absolute/path/to/rubrix/assets/imageEmbeddingLocations.json>
      >>> fix_paths_in_index(path_to_index, path_to_emb)
      ```
+ 4. Navigate to ``rubrix/rubrix/index`` directory and run the following bash script:
+    ```bash
+    $ bash quick_setup.sh
+    ```
 
 ### Usage
 
