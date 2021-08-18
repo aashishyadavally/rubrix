@@ -22,23 +22,34 @@ This section describes the preqrequisites, and contains instructions, to get the
 #### 1. Project Environment
 Currently, ``rubrix`` works flawlessly on Linux, and can be set up easily with all the prerequisite packages by following these instructions:
   1. Download appropriate version of [conda](https://repo.anaconda.com/miniconda/) for your machine.
-  2. Install  it by running the `conda_install.sh` file, with the command: `$ bash conda_install.sh`
-  3. Navigate to ``rubrix/`` (top-level directory) and create a conda virtual environment with the included `environment.yml` file using the following command:
+  2. Install  it by running the `conda_install.sh` file, with the command:
+     ```bash
+     $ bash conda_install.sh
+     ```
+  4. Navigate to ``rubrix/`` (top-level directory) and create a conda virtual environment with the included `environment.yml` file using the following command:
      
-     `$ conda env create -f environment.yml`
+     ```bash
+     $ conda env create -f environment.yml
+     ```
   4. Activate the virtual environment with the following command:
      
-     `$ conda activate rubrix`
+     ```bash
+     $ conda activate rubrix
+     ```
   5. To install the package with setuptools extras, use the following command in ``rubrix/`` (top-level directory) containing the `setup.py` file:
      
-     `$ pip install .`
+     ```bash
+     $ pip install .
+     ```
 
 #### 2A. Data Assets - Setup from Scratch
 Once the prerequisites have been installed, follow these instructions to build the project:
   1. Navigate to `rubrix/index` directory.
   2. Run the bash script `setup.sh` with the following command: 
   
-     `$ bash setup.sh` 
+     ```bash
+     $ bash setup.sh
+     ``` 
 
 What does this do?
 1. Downloads flickr8k image/captions dataset.
@@ -54,9 +65,12 @@ What does this do?
 1. Download data assets from [this](https://drive.google.com/file/d/1ZhGar-0OxdCikeWhDcsdm0Uov6qOto0S/view?usp=sharing) link.
 2. Unzip and save the contents in ``rubrix/assets``.
 3. All is left is to change the paths in ``rubrix/assets/index.json`` and ``rubrix/assets/imageEmbeddingLocations.json`` relative to the local machine. This can be done as follows:
-   - Ensure corresponding virtual environment is active, or activate with the following command: `$ conda activate rubrix`.
-   - Launch Python Interpretor in the terminal and run the following code snippet:
+   - Ensure corresponding virtual environment is active, or activate with the following command: 
+     ```bash
+     $ conda activate rubrix
      ```
+   - Launch Python Interpretor in the terminal and run the following code snippet:
+     ```python
      >>> from rubrix.utils import fix_paths_in_index
      >>> path_to_index = <absolute/path/to/rubrix/assets/index.json>
      >>> path_to_emb = <absolute/path/to/rubrix/assets/imageEmbeddingLocations.json>
@@ -77,7 +91,10 @@ You can also follow a working example for this [here](https://github.com/aashish
 An alternative is to use ``rubrix`` as an application on web browser. 
 
   - Navigate to ``rubrix`` (top-level) directory.
-  - Enter `$ rubrix` in the terminal to launch web application.
+  - Enter the following cammand in the terminal to launch web application:
+    ```bash
+    $ rubrix
+    ```
 
 
 ## Contributing Guidelines
