@@ -1,6 +1,9 @@
-# AI Powered Visual Search Engine
+<!--# AI Powered Visual Search Engine -->
+<p align="center">
+<img width="700" height="300" src="https://github.com/aashishyadavally/rubrix/blob/main/notebooks/images/cover.png">
+</p>
 
-## Project Description
+# AI Powered Visual Search Engine
 The main motivation behind building ``rubrix`` was to have a visual search engine completely powered by Artificial Intelligence, tying concepts within the fields of Natural Language Processing and Computer Vision, something we like to call "combined similarity search". Currently ``rubrix`` has two main functionalities:
 - take in a user input describing an image and retrieve five images that fit that description (image search)
 - take in a user uploaded image and retrieve five similar images (reverse-image search)
@@ -54,12 +57,17 @@ What does this do?
 
 ### Usage
 
+#### Module
 With the completion of these steps, you should be able to use `rubrix`.
 
-- For image search, execute the `rubrix/query/query_by_text` method.
-- For reverse image search, execute the `rubrix/query/query_by_image_objects` method.
+  - For image search, execute the `rubrix/query/query_by_text` method.
+  - For reverse image search, execute the `rubrix/query/query_by_image_objects` method.
 
 You can also follow a working example for this [here](https://github.com/aashishyadavally/rubrix/blob/main/notebooks/demo.ipynb).
+
+#### Web Application
+Another alternative is to use ``rubrix`` as an application on web browser. To do so, first navigate to ``rubrix`` directory. In the terminal, enter ``$ rubrix`` to launch web application.
+
 
 ## Contributing Guidelines
 There are no specific guidelines for contributing, apart from a few general guidelines we tried to follow, such as:
