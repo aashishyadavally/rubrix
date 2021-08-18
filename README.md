@@ -94,12 +94,11 @@ You can also follow a working example for this [here](https://github.com/aashish
 #### 2. Web Application
 An alternative is to use ``rubrix`` as an application on web browser. 
 
-  - Navigate to ``rubrix`` (top-level) directory.
+  - Navigate to ``rubrix/rubrix/web`` directory.
   - Enter the following cammand in the terminal to launch web application:
     ```bash
-    $ rubrix
+    $ python app.py
     ```
-
 
 ## Contributing Guidelines
 There are no specific guidelines for contributing, apart from a few general guidelines we tried to follow, such as:
