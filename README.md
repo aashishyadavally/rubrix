@@ -26,17 +26,21 @@ Currently, ``rubrix`` works flawlessly on Linux, and can be set up easily with a
      ```bash
      $ bash conda_install.sh
      ```
+  3. Add `conda` to bash profile:
+     ```bash
+     $ source ~/.bashrc
+     ```
   4. Navigate to ``rubrix/`` (top-level directory) and create a conda virtual environment with the included `environment.yml` file using the following command:
      
      ```bash
      $ conda env create -f environment.yml
      ```
-  4. Activate the virtual environment with the following command:
+  5. Activate the virtual environment with the following command:
      
      ```bash
      $ conda activate rubrix
      ```
-  5. To install the package with setuptools extras, use the following command in ``rubrix/`` (top-level directory) containing the `setup.py` file:
+  6. To install the package with setuptools extras, use the following command in ``rubrix/`` (top-level directory) containing the `setup.py` file:
      
      ```bash
      $ pip install .
