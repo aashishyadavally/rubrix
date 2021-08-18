@@ -17,7 +17,7 @@ You can check out some of the images retrieved by ``rubrix`` for sample queries 
 ## Getting Started
 This section describes the preqrequisites, and contains instructions, to get the project up and running.
 
-### Setup
+### Setup 
 
 #### 1. Project Environment
 Currently, ``rubrix`` works flawlessly on Linux, and can be set up easily with all the prerequisite packages by following these instructions:
@@ -33,7 +33,7 @@ Currently, ``rubrix`` works flawlessly on Linux, and can be set up easily with a
      
      `$ pip install .`
 
-#### 2. Data Assets
+#### 2A. Data Assets - Setup from Scratch
 Once the prerequisites have been installed, follow these instructions to build the project:
   1. Navigate to `rubrix/index` directory.
   2. Run the bash script `setup.sh` with the following command: 
@@ -49,15 +49,23 @@ What does this do?
 
 
 > **NOTE:** The above script can take between 1.5 - 2 hours to complete execution.
-> 
-> As a workaround, if you already have index.json and imageEmbeddingLocations.json available, you can stop running the bash script as you get to stage 8/9.
-> 
-> Place these files in the assets/ directory and run rubrix/utils/fix_paths_in_index method to correct the paths in these files corresponding to your own machine.
 
+#### 2B. Data Assets - Quick Setup
+1. Download data assets from [this](https://drive.google.com/file/d/1ZhGar-0OxdCikeWhDcsdm0Uov6qOto0S/view?usp=sharing) link.
+2. Unzip and save the contents in ``rubrix/assets``.
+3. All is left is to change the paths in ``rubrix/assets/index.json`` and ``rubrix/assets/imageEmbeddingLocations.json`` relative to the local machine. This can be done as follows:
+   - Ensure corresponding virtual environment is active, or activate with the following command: `$ conda activate rubrix`.
+   - Launch Python Interpretor in the terminal and run the following code snippet:
+     ```
+     >>> from rubrix.utils import fix_paths_in_index
+     >>> path_to_index = <absolute/path/to/rubrix/assets/index.json>
+     >>> path_to_emb = <absolute/path/to/rubrix/assets/imageEmbeddingLocations.json>
+     >>> fix_paths_in_index(path_to_index, path_to_emb)
+     ```
 
 ### Usage
 
-#### Module
+#### 1. As a package
 With the completion of these steps, you should be able to use `rubrix`.
 
   - For image search, execute the `rubrix/query/query_by_text` method.
@@ -65,8 +73,11 @@ With the completion of these steps, you should be able to use `rubrix`.
 
 You can also follow a working example for this [here](https://github.com/aashishyadavally/rubrix/blob/main/notebooks/demo.ipynb).
 
-#### Web Application
-Another alternative is to use ``rubrix`` as an application on web browser. To do so, first navigate to ``rubrix`` directory. In the terminal, enter ``$ rubrix`` to launch web application.
+#### 2. Web Application
+An alternative is to use ``rubrix`` as an application on web browser. 
+
+  - Navigate to ``rubrix`` (top-level) directory.
+  - Enter `$ rubrix` in the terminal to launch web application.
 
 
 ## Contributing Guidelines
