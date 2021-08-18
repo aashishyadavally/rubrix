@@ -9,6 +9,8 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 import sys
 import json
 import shutil
+import threading
+import webbrowser
 from pathlib import Path
 
 from werkzeug.utils import secure_filename
@@ -36,7 +38,10 @@ UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS=set(['.png', '.jpg', '.jpeg'])
 
 # Flask app set-up configuration
-app = Flask(__name__, static_url_path='/static')
+print(pathfinder.get('rubrix', 'web', 'templates'))
+app = Flask(__name__,
+            template_folder=str(pathfinder.get('rubrix', 'web', 'templates')),
+            static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
 
@@ -193,6 +198,12 @@ def results(message=None, result1=None, result2=None, result3=None,
                             result5=request.args.get('result5'))
 
 
-if __name__ == "__main__":
+def launch():
+    """Main function.
+
+    Entry point to console script - launches web application in browser.
+    """
+    url = f"http://localhost:{PORT}/"
+    threading.Timer(1.25, lambda: webbrowser.open(url) ).start()
     app.run(host='localhost', port=PORT, debug=True, threaded=True)
     sys.exit(0)

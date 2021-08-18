@@ -24,6 +24,7 @@ setup(
       # Packages can be manually mentioned, or `setuptools.find_packages`
       # can be used for this purpose.
       packages=find_packages(),
+      entry_points={'console_scripts': ['rubrix = rubrix.web.app:launch']},
       ext_modules=[
             Extension(
                   'dotproduct',
