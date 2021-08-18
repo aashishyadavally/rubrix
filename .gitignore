@@ -13,6 +13,10 @@ assets/predictions
 # Darknet Repo
 rubrix/index/darknet
 
+# Web stuff
+rubrix/web/uploads
+rubrix/web/static/predictions
+
 # C extensions
 *.so
 
