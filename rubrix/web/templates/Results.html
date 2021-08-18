@@ -37,8 +37,8 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-custom-font u-font-ubuntu u-nav u-spacing-2 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-grey-5 u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-hover-grey-10 u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Search.html" style="padding: 10px 20px; text-decoration: underline !important;">Search</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="Search.html">by text</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="Reverse-Search.html">by image</a>
+            <ul class="u-custom-font u-font-ubuntu u-nav u-spacing-2 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-grey-5 u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-hover-grey-10 u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="{{ url_for('search') }}" style="padding: 10px 20px; text-decoration: underline !important;">Search</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="{{ url_for('search') }}">by text</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="{{ url_for('reverse_search') }}">by image</a>
 </li></ul>
 </div>
 </li><li class="u-nav-item"><a class="u-active-grey-5 u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-hover-grey-10 u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Links.html" style="padding: 10px 20px; text-decoration: underline !important;">Links</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="https://github.com/aashishyadavally/storyteller" target="_blank">Github</a>
@@ -52,8 +52,8 @@
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Search.html" style="padding: 10px 20px; text-decoration: underline !important;">Search</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Search.html">by text</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Reverse-Search.html">by image</a>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('search') }}" style="padding: 10px 20px; text-decoration: underline !important;">Search</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('search') }}">by text</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('reverse_search') }}">by image</a>
 </li></ul>
 </div>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Links.html" style="padding: 10px 20px; text-decoration: underline !important;">Links</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-6"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://github.com/aashishyadavally/storyteller" target="_blank">Github</a>
@@ -67,50 +67,53 @@
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-        <img class="u-image u-image-default u-preserve-proportions u-image-1" src="images/910ce3dfa7ca49c59a0fa5f05d975f33.png" alt="" data-image-width="200" data-image-height="200" data-href="Search.html" data-page-id="514828">
+        <img class="u-image u-image-default u-preserve-proportions u-image-1" src="{{url_for('static', filename='images/910ce3dfa7ca49c59a0fa5f05d975f33.png') }}" alt="" data-image-width="200" data-image-height="200" data-href="{{ url_for('search') }}" data-page-id="514828">
       </div></header>
     <section class="u-align-center u-clearfix u-gradient u-section-1" id="sec-c9ba">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-border-6 u-border-grey-dark-1 u-line u-line-horizontal u-line-1"></div>
-        <p class="u-align-left-xs u-text u-text-default u-text-1"><b>Image search results for "Lorem Ipsum" :</b>
+        <p class="u-align-left-xs u-text u-text-default u-text-1"><b> {{ message }} </b>
         </p>
-        <div class="u-carousel u-expanded-width-xs u-gallery u-gallery-slider u-layout-carousel u-lightbox u-no-transition u-show-text-on-hover u-gallery-1" id="carousel-f035" data-interval="5000" data-u-ride="carousel">
+        <div class="u-carousel u-expanded-width-xs u-gallery u-gallery-slider u-layout-carousel u-lightbox u-no-transition u-show-text-on-hover u-gallery-1" id="carousel-f035" data-interval="3000" data-u-ride="carousel">
           <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1">
             <li data-u-target="#carousel-f035" data-u-slide-to="0" class="u-active u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
             <li data-u-target="#carousel-f035" data-u-slide-to="1" class="u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
+            <li data-u-target="#carousel-f035" data-u-slide-to="2" class="u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
+            <li data-u-target="#carousel-f035" data-u-slide-to="3" class="u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
+            <li data-u-target="#carousel-f035" data-u-slide-to="4" class="u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
           </ol>
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-gallery-item u-carousel-item-1">
               <div class="u-back-slide" data-image-width="1280" data-image-height="720">
-                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='predictions/0.png') }}">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename=result1) }}">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1">
               </div>
             </div>
-            <div class="u-active u-carousel-item u-effect-fade u-gallery-item u-carousel-item-2">
+            <div class="u-carousel-item u-effect-fade u-gallery-item u-carousel-item-2">
               <div class="u-back-slide" data-image-width="1280" data-image-height="720">
-                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='predictions/1.png') }}">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename=result2) }}">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2">
               </div>
             </div>
-            <div class="u-active u-carousel-item u-effect-fade u-gallery-item u-carousel-item-3">
+            <div class="u-carousel-item u-effect-fade u-gallery-item u-carousel-item-3">
               <div class="u-back-slide" data-image-width="1280" data-image-height="720">
-                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='predictions/2.png') }}">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename=result3) }}">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-3">
               </div>
             </div>
             <div class="u-carousel-item u-effect-fade u-gallery-item u-carousel-item-4">
               <div class="u-back-slide" data-image-width="239" data-image-height="211">
-                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='predictions/2.png') }}">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename=result4) }}">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-4">
               </div>
             </div>
             <div class="u-carousel-item u-effect-fade u-gallery-item u-carousel-item-5">
               <div class="u-back-slide" data-image-width="239" data-image-height="211">
-                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='predictions/4.png') }}">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename=result5) }}">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-5">
               </div>
@@ -151,16 +154,5 @@ background-color: #d9d9d9 !important; background-image: linear-gradient(#d9d9d9,
     <footer class="u-align-center u-clearfix u-footer u-grey-90 u-footer" id="sec-1cc1"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">(c) 2021</p>
       </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="https://nicepage.com/" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
   </body>
 </html>

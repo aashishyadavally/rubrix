@@ -82,9 +82,9 @@
                   <h2 class="u-custom-font u-font-ubuntu u-subtitle u-text u-text-2">Upload image to find similar images</h2>
                   
                   
-                  <a class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-dark-1 u-radius-6 u-btn-1" href='#' id='seefood_button'>
-                    <form id='seefood_form' method=post enctype=multipart/form-data>
-                        <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
+                  <a class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-dark-1 u-radius-6 u-btn-1" href='#' id='search_button'>
+                    <form id='search_form' method=post enctype=multipart/form-data>
+                        <input id="search_field" name="file" type="file" onchange="this.form.submit();" hidden/>
                     </form>UPLOAD IMAGE</a>
                 </div>
               </div>
@@ -108,10 +108,10 @@
    <!-- Button added for uploading image --> 
    <script>
         // added to get upload with a button working
-        document.getElementById('seefood_button').addEventListener('click', openDialog);
+        document.getElementById('search_button').addEventListener('click', openDialog);
 
         function openDialog() {
-            document.getElementById('seefood_input_field').click();
+            document.getElementById('search_field').click();
         }
     </script>
 
@@ -124,8 +124,8 @@
             }).bind("ajaxError", function() {
                 $(this).hide();
             });
-            // seefood_input_field
-            $('#seefood_button').click(function() {
+            // search_input_field
+            $('#search_button').click(function() {
 
             });
 

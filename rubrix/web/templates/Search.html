@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Search.css') }}" media="screen">
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='nicepage.js') }}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='search.js') }}" defer=""></script>
     <meta name="generator" content="Nicepage 3.20.0, nicepage.com">
     <script type="text/javascript" src="//static.nicepage.com/shared/assets/jquery-1.9.1.min.js" defer="defer"></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
@@ -99,13 +100,16 @@
                        Search button stop -->
 
                       <!-- Search button start -->
-
-                    <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
-                        <label for="message-edfe" class="u-custom-font u-font-ubuntu u-form-control-hidden u-label"></label>
-                        <input id="search_input" input placeholder="Enter text here to see &quot;rubrix&quot; work its magic.." rows="2" cols="50" id="message-edfe" name="prompt" class="u-border-1 u-border-grey-30 u-custom-font u-font-ubuntu u-input u-input-rectangle u-white" required="">
-                      <input type="submit" value="Search"> </form>
-<!--
-                      <div class="u-align-center u-form-group u-form-submit">
+                    <form action="{{ url_for('search_post')}}" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
+                        <label for="search_input" class="u-custom-font u-font-ubuntu u-form-control-hidden u-label"></label>
+                        <input id="search_input" placeholder="Enter text here to see &quot;rubrix&quot; work its magic.." rows="2" cols="50" name="prompt" class="u-border-1 u-border-grey-30 u-custom-font u-font-ubuntu u-input u-input-rectangle u-white" required="">
+                        <div class="u-align-center u-form-group u-form-submit" >
+                        <button id="search_button" type="button" class="u-border-0 u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-ubuntu u-hover-palette-1-light-1 u-palette-1-dark-1 u-radius-10 u-btn-1">Search</button>
+                        </div>
+<!--                        <input type="submit" id="search_button" class="u-border-0 u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-ubuntu u-hover-palette-1-light-1 u-palette-1-dark-1 u-radius-10 u-btn-1" value="Search">  -->
+<!--                        <a id="search_button" href="#" class="u-border-0 u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-ubuntu u-hover-palette-1-light-1 u-palette-1-dark-1 u-radius-10 u-btn-1">Search<br></a>-->
+                     </form>
+<!--                      <div class="u-align-center u-form-group u-form-submit">
                         <a id="search_button" href="#" class="u-border-0 u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-ubuntu u-hover-palette-1-light-1 u-palette-1-dark-1 u-radius-10 u-btn-1">Search</a>
                       </div>
                       </form>
@@ -134,7 +138,7 @@
               </span>
               <br>
             </p>
-            <a href="https://github.com/aashishyadavally/storyteller" class="u-active-palette-4-base u-btn u-btn-round u-button-style u-gradient u-hover-palette-4-base u-none u-radius-7 u-text-active-black u-text-body-alt-color u-text-hover-black u-btn-1">Learn More!</a>
+            <a href="https://github.com/aashishyadavally/rubrix/wiki/How-does-rubrix-work%3F" class="u-active-palette-4-base u-btn u-btn-round u-button-style u-gradient u-hover-palette-4-base u-none u-radius-7 u-text-active-black u-text-body-alt-color u-text-hover-black u-btn-1">Learn More!</a>
           </div>
         </div>
       </div>
