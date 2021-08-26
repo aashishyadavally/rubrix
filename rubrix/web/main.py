@@ -200,7 +200,6 @@ def launch():
     Entry point to console script - launches web application in browser.
     """
     url = f"http://localhost:{PORT}/"
-    print(url)
     threading.Timer(1.25, lambda: webbrowser.open(url) ).start()
     app.run(host='localhost', port=PORT, debug=True, threaded=True)
     sys.exit(0)

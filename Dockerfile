@@ -20,7 +20,7 @@ COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 80
 RUN chmod +x entrypoint.sh
-RUN chmod 755 -R /root
+RUN chmod 777 -R /root
 RUN chmod 755 -R /var/www/rubrix
 RUN chown -R www-data:www-data /var/www/rubrix
 CMD  ["/entrypoint.sh"]
