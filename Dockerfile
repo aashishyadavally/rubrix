@@ -9,10 +9,10 @@ RUN apt-get update && apt-get install\
     nginx\
     python3-pip\
     linux-headers-amd64\
-    build-essential\ 
-    gcc\ 
-    g++\ 
-    python3-dev\ 
+    build-essential\
+    gcc\
+    g++\
+    python3-dev\
     zip\
     unzip\
     musl-dev\
@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install\
 
 # install pip requirements (note that uwsgi is required regardless of what else you may modify)
 RUN python3 -m pip install\
-    numpy\ 
-    scipy\ 
+    numpy\
+    scipy\
     tensorflow-hub\
     tensorflow==2.5.0\
     scikit-image\
@@ -38,6 +38,9 @@ RUN python3 -m pip install\
     kaggle\
     scikit-learn\
     uwsgi
+
+# install the model spacy needs
+RUN python3 -m spacy download en_core_web_sm
 
 # copy project to WORKDIR
 COPY . .
