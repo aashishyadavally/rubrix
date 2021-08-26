@@ -28,8 +28,8 @@ setup(
       ext_modules=[
             Extension(
                   'dotproduct',
-                  sources = ['source/dotproduct.c'],
-                  include_dirs=['source'],
+                  sources = ['csource/dotproduct.c'],
+                  include_dirs=['csource'],
                   extra_compile_args=['-fopenmp'],
                   extra_link_args=['-lgomp']),
       ],
