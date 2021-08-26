@@ -101,7 +101,7 @@ class ReverseSearchResultObject(SearchResultObject):
         self.score = score
 
 
-def query_by_text(text, model, save=True):
+def query_by_text(text, model, save=False):
     """Processes text queries to retrieve relevant images from database.
 
     Arguments:
@@ -207,7 +207,7 @@ def query_by_image_captions(image_path, model, save=True):
 
 
 def query_by_image_objects(image_path, weights_path, cfg_path, names_path, 
-                           confidence_threshold=0.5, save=True):
+                           confidence_threshold=0.5, save=False):
     """Processes user-uploaded image to retrieve similar images from database.
 
     First, all the objects in the image are detected using the :method:

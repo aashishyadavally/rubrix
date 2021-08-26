@@ -67,12 +67,10 @@ def copy_results(images):
     """Copies retrieved images from image database to 
     ``rubrix/web/static/predictions``. File names of the retrieved images
     is returned.
-
     Arguments:
     ----------
         images (list):
             List of :class: ``pathlib.Path`` objects for the retrieved images.
-
     Returns:
     --------
         image_names (list):
@@ -81,6 +79,9 @@ def copy_results(images):
     image_names = [Path(image).name for image in images]
     dst_path = pathfinder.get('rubrix', 'web', 'static', 'predictions')
     if not dst_path.is_dir():
+        dst_path.mkdir(parents=True)
+    elif len(list(dst_path.iterdir())) > 1000:
+        dst_path.rmdir()
         dst_path.mkdir(parents=True)
 
     for idx, image in enumerate(images):
@@ -128,7 +129,8 @@ def search_post():
                                 result2='predictions/' + image_names[1],
                                 result3='predictions/' + image_names[2],
                                 result4='predictions/' + image_names[3],
-                                result5='predictions/' + image_names[4]
+                                result5='predictions/' + image_names[4],
+                                _external=True, _scheme='https'
                                 ))
     else:
         return redirect(url_for('search'))
@@ -175,10 +177,11 @@ def reverse_search_post():
                                 result2='predictions/' + image_names[1],
                                 result3='predictions/' + image_names[2],
                                 result4='predictions/' + image_names[3],
-                                result5='predictions/' + image_names[4]
+                                result5='predictions/' + image_names[4],
+                                _external=True, _scheme='https'
                                 ))
     else:
-        return redirect(url_for('search'))
+        return redirect(url_for('search', _external=True, _scheme='https'))
 
 
 @app.route('/results')

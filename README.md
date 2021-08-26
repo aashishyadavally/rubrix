@@ -95,14 +95,31 @@ With the completion of these steps, you should be able to use `rubrix`.
 
 You can also follow a working example for this [here](https://github.com/aashishyadavally/rubrix/blob/main/notebooks/demo.ipynb).
 
-#### 2. Web Application
+#### 2. Local Web Application
 An alternative is to use ``rubrix`` as an application on web browser. 
 
   - Navigate to ``rubrix/rubrix/web`` directory.
-  - Enter the following cammand in the terminal to launch web application:
+  - Enter the following command in the terminal to launch web application:
     ```bash
     $ python app.py
     ```
+
+#### 3. Dockerized Web Application
+This is for if you want to deploy ``rubrix`` on a server e.g. an Ubuntu Linux server on AWS
+
+  1. Navigate to the top directory
+  2. Enter the following command to build the docker image:
+   ```bash
+    $ sudo docker build -t <YOUR-NAME>/rubrix .
+   ```
+  3. You can then run:
+   ```bash
+    $ sudo docker run -p 9000:80 <YOUR-NAME>/rubrix
+   ```
+
+The ideal setup for this would be to have a Apache/Nginx reverse proxy setup on the host system, pointing to port ``9000`` in this case, and the host system's Apache/Nginx would handle SSL. This would be so you can deploy the application over and over again without worrying about remaking SSL certificates.
+
+#### The Dockerfile does not use the ``environment.yml`` file because using conda on any sort of production environment is a nightmare. Changes made there will not be reflected in the Dockerized container.
 
 ## Contributing Guidelines
 There are no specific guidelines for contributing, apart from a few general guidelines we tried to follow, such as:
