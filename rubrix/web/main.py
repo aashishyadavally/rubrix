@@ -67,12 +67,10 @@ def copy_results(images):
     """Copies retrieved images from image database to 
     ``rubrix/web/static/predictions``. File names of the retrieved images
     is returned.
-
     Arguments:
     ----------
         images (list):
             List of :class: ``pathlib.Path`` objects for the retrieved images.
-
     Returns:
     --------
         image_names (list):
@@ -81,6 +79,9 @@ def copy_results(images):
     image_names = [Path(image).name for image in images]
     dst_path = pathfinder.get('rubrix', 'web', 'static', 'predictions')
     if not dst_path.is_dir():
+        dst_path.mkdir(parents=True)
+    elif len(list(dst_path.iterdir())) > 1000:
+        dst_path.rmdir()
         dst_path.mkdir(parents=True)
 
     for idx, image in enumerate(images):
@@ -199,6 +200,7 @@ def launch():
     Entry point to console script - launches web application in browser.
     """
     url = f"http://localhost:{PORT}/"
+    print(url)
     threading.Timer(1.25, lambda: webbrowser.open(url) ).start()
     app.run(host='localhost', port=PORT, debug=True, threaded=True)
     sys.exit(0)

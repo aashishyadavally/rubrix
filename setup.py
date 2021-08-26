@@ -9,7 +9,7 @@ repo_dir = os.path.abspath(__file__)
 # Long description is just the contents of README.md
 long_description = 'Read README.md for long description'
 
-os.environ["CC"] = "gcc-9"
+os.environ["CC"] = "gcc"
 
 setup(
       # Users can install the project with the following command:
