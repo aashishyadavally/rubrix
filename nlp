@@ -6,6 +6,7 @@ upstream uwsgicluster {
 server {
     # Running port
     listen 80;
+    client_max_body_size 20M;
 
     # Proxying connections to application servers
     location / {
