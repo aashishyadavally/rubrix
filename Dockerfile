@@ -39,8 +39,10 @@ RUN python3 -m pip install\
     scikit-learn\
     uwsgi
 
-# install the model spacy needs
+# install the models spacy needs
 RUN python3 -m spacy download en_core_web_sm
+RUN python3 -m spacy download en_core_web_md
+RUN python3 -m spacy download en_core_web_lg
 
 # copy project to WORKDIR
 COPY . .
