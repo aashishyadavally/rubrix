@@ -7,9 +7,11 @@ server {
     # Running port
     listen 80;
     client_max_body_size 20M;
-    proxy_read_timeout 300;
-    proxy_connect_timeout 300;
-    proxy_send_timeout 300; 
+    proxy_send_timeout 180s;
+    proxy_read_timeout 180s;
+    fastcgi_send_timeout 180s;
+    fastcgi_read_timeout 180s;
+    
 
     # Proxying connections to application servers
     location / {
