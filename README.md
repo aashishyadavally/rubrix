@@ -109,13 +109,13 @@ This is for if you want to deploy ``rubrix`` on a server e.g. an Ubuntu Linux se
 
   1. Navigate to the top directory
   2. Enter the following command to build the docker image:
-    ```bash
+   ```bash
     $ sudo docker build -t <YOUR-NAME>/rubrix .
-    ```
+   ```
   3. You can then run:
-    ```bash
+   ```bash
     $ sudo docker run -p 9000:80 <YOUR-NAME>/rubrix
-    ```
+   ```
 
 The ideal setup for this would be to have a Apache/Nginx reverse proxy setup on the host system, pointing to port ``9000`` in this case, and the host system's Apache/Nginx would handle SSL. This would be so you can deploy the application over and over again without worrying about remaking SSL certificates.
 
