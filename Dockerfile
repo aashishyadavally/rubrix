@@ -25,19 +25,19 @@ RUN apt-get update && apt-get install\
 
 # install pip requirements (note that uwsgi is required regardless of what else you may modify)
 RUN python3 -m pip install\
+    flask\
+    jupyter\
+    kaggle\
+    matplotlib\
+    nltk\
     numpy\
+    opencv-python\
+    scikit-image\
+    scikit-learn\
     scipy\
+    spacy==3.1.0\
     tensorflow-hub\
     tensorflow==2.5.0\
-    scikit-image\
-    nltk\
-    spacy==3.1.0\
-    flask\
-    matplotlib\
-    jupyter\
-    opencv-python\
-    kaggle\
-    scikit-learn\
     uwsgi
 
 # install the models spacy needs
