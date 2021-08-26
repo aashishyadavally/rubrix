@@ -50,6 +50,9 @@ COPY . .
 # install rubrix
 RUN python3 -m pip install .
 
+# install darknet
+RUN cd /var/www/rubrix/rubrix/index && bash quick_setup.sh
+
 # setup internal reverse proxy and entrypoint
 COPY nlp /etc/nginx/sites-enabled/default
 COPY entrypoint.sh /entrypoint.sh

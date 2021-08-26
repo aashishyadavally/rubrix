@@ -2,10 +2,6 @@
 
 # This script is useful when following instructions for quick setup.
 
-# Exit when any command fails
-set -e
-
-
 # Download yolo-v4 code repository
 echo "[INFO] Stage 1/2: Downloading darknet code repository"
 if [ ! -d "darknet" ]; then
