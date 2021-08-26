@@ -129,7 +129,8 @@ def search_post():
                                 result2='predictions/' + image_names[1],
                                 result3='predictions/' + image_names[2],
                                 result4='predictions/' + image_names[3],
-                                result5='predictions/' + image_names[4]
+                                result5='predictions/' + image_names[4],
+                                _external=True, _scheme='https'
                                 ))
     else:
         return redirect(url_for('search'))
@@ -176,10 +177,11 @@ def reverse_search_post():
                                 result2='predictions/' + image_names[1],
                                 result3='predictions/' + image_names[2],
                                 result4='predictions/' + image_names[3],
-                                result5='predictions/' + image_names[4]
+                                result5='predictions/' + image_names[4],
+                                _external=True, _scheme='https'
                                 ))
     else:
-        return redirect(url_for('search'))
+        return redirect(url_for('search', _external=True, _scheme='https'))
 
 
 @app.route('/results')
