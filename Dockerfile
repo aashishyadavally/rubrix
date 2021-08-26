@@ -6,21 +6,22 @@ WORKDIR /var/www/rubrix
 
 # install system requirements
 RUN apt-get update && apt-get install\
-    nginx\
-    python3-pip\
-    linux-headers-amd64\
     build-essential\
-    gcc\
-    g++\
-    python3-dev\
-    zip\
-    unzip\
-    musl-dev\
-    nano\
     ffmpeg\
+    g++\
+    gcc\
+    git\
     libsm6\
     libxext6\
-    systemd -y
+    linux-headers-amd64\
+    musl-dev\
+    nano\
+    nginx\
+    python3-dev\
+    python3-pip\
+    systemd\
+    unzip\
+    zip -y
 
 # install pip requirements (note that uwsgi is required regardless of what else you may modify)
 RUN python3 -m pip install\
@@ -51,7 +52,7 @@ COPY . .
 RUN python3 -m pip install .
 
 # install darknet
-RUN cd /var/www/rubrix/rubrix/index && bash quick_setup.sh
+RUN cd /var/www/rubrix/rubrix/index && sh quick_setup.sh
 
 # setup internal reverse proxy and entrypoint
 COPY nlp /etc/nginx/sites-enabled/default
